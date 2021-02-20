@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { example } from "./exemplo.js";
 import axios from "axios";
+import { Heading } from 'grommet';
 function App() {
   const [data, setData] = useState([]);
   const [tmp, setTmp] = useState(0);
@@ -22,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Crypt Alert</h1>
+        <Heading>Crypt Alert</Heading>
       </header>
       <div>
         {data.map((currencie) => (
