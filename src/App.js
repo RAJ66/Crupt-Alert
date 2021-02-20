@@ -6,7 +6,6 @@ function App() {
   const [data, setData] = useState([]);
   const [tmp, setTmp] = useState(0);
 
-
   useEffect(async () => {
     if (process.env.REACT_APP_MODE === "DEV") {
       setData(example);
