@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useState, useEffect } from "react";
+import { example } from "./exemplo.js";
+import axios from "axios"
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(async() => {
+if (process.env.REACT_APP_MODE === "DEV") {
+  setData(example);
+} else { 
+  const test = await axios.get('https://api.nomics.com/v1/currencies/ticker?key=demo-6410726746980cead2a17c9db9ef29af&ids=BTC,ETH&interval=1h,1d,30d&convert=EUR&per-page=100&page=1')
+  setData(test.data);
+  
+}
+   
+  }, []);
+
+  console.log(example);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+       <h1>Crypt Alert</h1>
       </header>
+      <div>
+      {data.map((currencie)=>
+      <article key={currencie.id}>
+        <h1>{currencie.name}</h1>
+        <p>Price: {currencie.price}</p>
+      </article>)}
+      </div>
     </div>
   );
 }
